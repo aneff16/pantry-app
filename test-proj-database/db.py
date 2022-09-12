@@ -67,19 +67,19 @@ class Pantry(db.Model):
 @app.route('/')
 def testdb():
     try:
-        new_pantry_item = PantryItem('Bread')
+        """new_pantry_item = PantryItem('Bread')
         db.session.add(new_pantry_item)
         db.session.commit()
         users = User.query.all()
         items = PantryItem.query.all()
         add_to_pantry = Pantry(user_id=users[0].id, item_id=items[0].id, quantity=1)
         db.session.add(add_to_pantry)
-        db.session.commit()
-        pantry = Pantry.query.all()
-        text = '<h1>'
+        db.session.commit()"""
+        pantry = Pantry.query.filter_by(user_id=1).all()
+        """text = '<h1>'
         for item in pantry:
-            text += item.pantry_items.name + '<h1>'
-        return text
+            text += item.pantry_items.name + '<h1>'"""
+        return pantry
 
     except Exception as e:
         # see Terminal for description of the error
