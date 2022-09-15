@@ -28,7 +28,8 @@ function App() {
     }
     if (!found){
       await addPantryItem(item);
-      setPantry((prev) => ([...prev, item]));
+      await getData();
+      //setPantry((prev) => ([...prev, item]));
     }
   };
 
@@ -63,7 +64,12 @@ function App() {
     if (!newItem.quantity || !newItem.name) {
       return;
     }else {
-      addItem(newItem);
+      console.log(newItem);
+      // need to make new object to ensure that the item name is lower case
+      addItem({
+        name: newItem.name.toLowerCase(),
+        quantity: newItem.quantity
+      })
       setNewItem({});
     }
     event.target.reset();
