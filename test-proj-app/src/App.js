@@ -18,6 +18,8 @@ function App() {
 
   const addItem = async item => {
     let found = false;
+    // check if the item entered is already in the pantry
+    // if it is, add the quantity enterd to the current quantity and call editPantryItem()
     for (let i = 0; i < pantry.length; i++) {
       if (item.name === pantry[i].name) {
         pantry[i].quantity = parseInt(pantry[i].quantity) + parseInt(item.quantity);
@@ -28,9 +30,8 @@ function App() {
     }
     if (!found){
       await addPantryItem(item);
-      await getData();
-      //setPantry((prev) => ([...prev, item]));
     }
+    await getData();
   };
 
   const handleAdd = async item => {
@@ -41,22 +42,23 @@ function App() {
 
   const handleSubtract = async item => {
     if (item.quantity === 1) {
-      setPantry((prev) => prev.filter(
+      /*setPantry((prev) => prev.filter(
         (p) => p.name !== item.name
-      ));
-      await deletePantryItem(item.id);
+      ));*/
+      await deletePantryItem(item);
     }else {
       item.quantity--;
       await editPantryItem(item);
-      setPantry([...pantry]);
     }
+    getData();
   };
 
-  const handleDelete = async id => {
-    setPantry((prev) => prev.filter(
+  const handleDelete = async item => {
+    /*setPantry((prev) => prev.filter(
       (p) => p.id !== id
-    ));
-    await deletePantryItem(id);
+    ));*/
+    await deletePantryItem(item);
+    await getData();
   };
 
   const handleSubmit = async (event) => {
@@ -64,7 +66,6 @@ function App() {
     if (!newItem.quantity || !newItem.name) {
       return;
     }else {
-      console.log(newItem);
       // need to make new object to ensure that the item name is lower case
       addItem({
         name: newItem.name.toLowerCase(),
@@ -117,7 +118,7 @@ function App() {
               </td>
               <td>{p.item_id}</td>
               <td>
-                <button onClick={handleDelete.bind(this, p.id)}>Delete this item</button>
+                <button onClick={handleDelete.bind(this, p)}>Delete this item</button>
               </td>
             </tr>
           ))}

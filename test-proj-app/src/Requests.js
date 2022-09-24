@@ -18,24 +18,28 @@ export const getPantry = async () => {
     return;
   };
 
-  export const deletePantryItem = async id => {
-    const response = await fetch(`${APIURL}/items/${id}`, {
+  export const deletePantryItem = async item => {
+    const response = await fetch(`${APIURL}/items/${item.item_id}`, {
       method: "DELETE",
       mode: "cors",
-      cache: "no-cache"
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(item)
     });
     return;
   };
 
-  export const editPantryItem = async data => {
-    const response = await fetch(`${APIURL}/items/${data.id}`, {
+  export const editPantryItem = async item => {
+    const response = await fetch(`${APIURL}/items/${item.item_id}`, {
       method: "PUT",
       mode: "cors",
       cache: "no-cache",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(item)
     });
     return;
   };
