@@ -6,7 +6,7 @@ export const getPantry = async () => {
   };
 
   export const addPantryItem = async item => {
-    const response = await fetch(`${APIURL}/items`, {
+    await fetch(`${APIURL}/items`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -19,7 +19,7 @@ export const getPantry = async () => {
   };
 
   export const deletePantryItem = async item => {
-    const response = await fetch(`${APIURL}/items/${item.item_id}`, {
+    await fetch(`${APIURL}/items/${item.item_id}`, {
       method: "DELETE",
       mode: "cors",
       cache: "no-cache",
@@ -32,7 +32,7 @@ export const getPantry = async () => {
   };
 
   export const editPantryItem = async item => {
-    const response = await fetch(`${APIURL}/items/${item.item_id}`, {
+    await fetch(`${APIURL}/items/${item.item_id}`, {
       method: "PUT",
       mode: "cors",
       cache: "no-cache",

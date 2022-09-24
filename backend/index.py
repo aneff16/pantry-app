@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from configparser import ConfigParser
 from .model import db, User, Pantry, PantryItem
+import os
 
 app = Flask(__name__)
 db.init_app(app)
@@ -11,7 +12,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # get config file for database user and password
 config = ConfigParser()
-config.read('/home/aneff/web-dev/config/keys_config.cfg')
+config.read(os.getenv('BACKEND_CONFIG'))
 
 username = config.get('pantry_db', 'user')
 password = config.get('pantry_db', 'password')
@@ -69,7 +70,7 @@ def add_item():
     except Exception as e:
         # see Terminal for description of the error
         print("\nThe error:\n" + str(e) + "\n")
-        return '', 400
+        return '', 500
 
     return '', 204
 

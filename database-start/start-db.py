@@ -3,8 +3,8 @@
 
 from getpass import getpass
 from mysql.connector import connect, Error
-
-"""try:
+"""
+try:
     with connect(
         host="localhost",
         port=9999,
@@ -15,8 +15,8 @@ from mysql.connector import connect, Error
         with connection.cursor() as cursor:
             cursor.execute(create_db_query)
 except Error as e:
-    print(e)"""
-
+    print(e)
+"""
 try:
     with connect(
         host="localhost",
@@ -26,19 +26,19 @@ try:
         database="pantry_tracker",
     ) as connection:
         create_user_table_query = '''
-        CREATE TABLE users(
+        CREATE TABLE IF NOT EXISTS users(
             id INT AUTO_INCREMENT PRIMARY KEY,
             user_name TEXT
         )
         '''
         create_pantry_items_table_query = '''
-        CREATE TABLE pantry_items (
+        CREATE TABLE IF NOT EXISTS pantry_items (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name TEXT
         )
         '''
         create_pantry_table_query = '''
-        CREATE TABLE pantry (
+        CREATE TABLE IF NOT EXISTS pantry (
             user_id INT,
             item_id INT,
             quantity INT,
@@ -47,10 +47,17 @@ try:
             PRIMARY KEY(user_id, item_id)
         )
         '''
+
+        create_default_user_query = '''
+        INSERT INTO users (user_name)
+        VALUES ('default')
+        '''
+
         with connection.cursor() as cursor:
             cursor.execute(create_user_table_query)
             cursor.execute(create_pantry_items_table_query)
             cursor.execute(create_pantry_table_query)
+            cursor.execute(create_default_user_query)
             connection.commit()
 except Error as e:
     print(e)
