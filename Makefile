@@ -1,5 +1,6 @@
 start-frontend:
 	cd frontend && \
+	npm install && \
 	npm start
 
 start-backend:
