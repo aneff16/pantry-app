@@ -1,3 +1,6 @@
+# code to start initialize the database
+# each part should only be run once
+
 from getpass import getpass
 from mysql.connector import connect, Error
 
@@ -14,7 +17,7 @@ from mysql.connector import connect, Error
 except Error as e:
     print(e)"""
 
-"""try:
+try:
     with connect(
         host="localhost",
         port=9999,
@@ -49,23 +52,5 @@ except Error as e:
             cursor.execute(create_pantry_items_table_query)
             cursor.execute(create_pantry_table_query)
             connection.commit()
-except Error as e:
-    print(e)"""
-
-
-try:
-    with connect(
-        host="localhost",
-        port=9999,
-        user=input("Enter username: "),
-        password=getpass("Enter password: "),
-        database="pantry_tracker"
-    ) as connection:
-        show_table_query = "DESCRIBE pantry_items"
-        with connection.cursor() as cursor:
-            cursor.execute(show_table_query)
-            result = cursor.fetchall()
-            for row in result:
-                print(row)
 except Error as e:
     print(e)
