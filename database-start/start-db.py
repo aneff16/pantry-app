@@ -1,7 +1,7 @@
 # code to start initialize the database
 # each part should only be run once
-
-from getpass import getpass
+import os
+from configparser import ConfigParser
 from mysql.connector import connect, Error
 """
 try:
@@ -18,11 +18,17 @@ except Error as e:
     print(e)
 """
 try:
+    # get config file for database user and password
+    config = ConfigParser()
+    config.read(os.getenv('BACKEND_CONFIG'))
+    username = config.get('pantry_db', 'user')
+    passw = config.get('pantry_db', 'password')
+
     with connect(
         host="localhost",
         port=9999,
-        user=input("Enter username: "),
-        password=getpass("Enter password: "),
+        user=username,
+        password=passw,
         database="pantry_tracker",
     ) as connection:
         create_user_table_query = '''

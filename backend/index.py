@@ -88,19 +88,13 @@ def edit_item(item_id):
     except Exception as e:
         # see Terminal for description of the error
         print("\nThe error:\n" + str(e) + "\n")
-        return '', 400
+        return '', 500
     
     return '', 204
 
 
 @app.route('/items/<item_id>', methods=['DELETE'])
 def delete_item(item_id):
-    """temp = []
-    global items
-    for i in items:
-        if i['id'] != int(id):
-            temp.append(i)
-    items = temp"""
     item = request.get_json()
     try:
         # find the item in the pantry
@@ -111,5 +105,6 @@ def delete_item(item_id):
     except Exception as e:
         # see Terminal for description of the error
         print("\nThe error:\n" + str(e) + "\n")
-        return '', 400
+        return '', 500
+
     return '', 204
