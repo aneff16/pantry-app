@@ -1,7 +1,7 @@
 # pantry-app
 
 ## What Is It?
-This is a simple app written in JavaScript with React on the frontend and Flask, Python, and SQLAlchemy on the backend.  The purpose is to allow users to login and track grocery items in their pantry.  The backend was created with support for multiple users in mind, but currently the app only runs with a single default user.
+This is a simple app written in JavaScript with React on the frontend and Flask, Python, and SQLAlchemy on the backend.  The purpose is to allow users to track grocery items in their pantry.  The backend was created with support for multiple users in mind, but currently the app only runs with a single default user.
 
 ## Initial Setup
 To run this app, you need to have [Node.js](https://nodejs.org/en/), Python 3 with pipenv installed and Docker.
